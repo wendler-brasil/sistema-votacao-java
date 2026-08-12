@@ -3,19 +3,19 @@ import java.util.Scanner;
 public class SistemaVotacao {
 
     //variáveis """"globais""""
-    static Scanner scan = new Scanner (System.in);
+    static Scanner scan = new Scanner(System.in);
     static final int MAX_CANDIDATOS = 5;
     static final int TOTAL_TURMAS = 3;
     static final int MAX_VOTANTES_POR_TURMA = 10;
 
     //matrizes
-    static int [] numerosCandidatos = new int [MAX_CANDIDATOS];
-    static String [] nomesCandidatos = new String [MAX_CANDIDATOS];
-    static int [] votosCandidatos = new int [MAX_CANDIDATOS];
+    static int[] numerosCandidatos = new int[MAX_CANDIDATOS];
+    static String[] nomesCandidatos = new String[MAX_CANDIDATOS];
+    static int[] votosCandidatos = new int[MAX_CANDIDATOS];
 
-    static int [][] votosPorTurma = new int[TOTAL_TURMAS][MAX_VOTANTES_POR_TURMA];
+    static int[][] votosPorTurma = new int[TOTAL_TURMAS][MAX_VOTANTES_POR_TURMA];
 
-    static int [] quantidadeVotosTruma = new int [TOTAL_TURMAS];
+    static int[] quantidadeVotosTruma = new int[TOTAL_TURMAS];
     static int quantidadeCandidatos = 0;
 
     // -------- | --------- | --------
@@ -24,10 +24,46 @@ public class SistemaVotacao {
     public static void main(String[] args) {
 
         System.out.println("Sistema de votação inciado");
-        
-        scan.close();
+        int opcao;
+
+//Menu principal
+
+        do {
+
+            System.out.println("\n SISTEMA DE VOTAÇÃO");
+            System.out.println("1 - Cadastrar candidatos");
+            System.out.println("2 - Iniciar votação");
+            System.out.println("3 - Exibir resultado");
+            System.out.println("4 - Exibir matriz de votos");
+            System.out.println("5 - Sair");
+
+            System.out.print("Opção: ");
+            opcao = scan.nextInt();
+
+            switch (opcao){
+
+                case 1:
+                    System.out.println("Cadastro selecionado");
+                    break;
+                case 2:
+                    System.out.println("Votação selecionado");
+                    break;
+                case 3:
+                    System.out.println("Resultado selecionado");
+                    break;
+                case 4:
+                    System.out.println("Matriz selecionada");
+                    break;
+                case 5:
+                    System.out.println("Sistema encerrado");
+                    break;
+                default:
+                    System.out.println("Não há essa opção");
+
+            }
+
+        } while (opcao != 5);
 
 
-
-        }
     }
+}
