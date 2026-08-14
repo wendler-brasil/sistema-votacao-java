@@ -23,27 +23,32 @@ public class SistemaVotacao {
 
     public static void main(String[] args) {
 
-        System.out.println("Sistema de votação inciado");
         int opcao;
 
 //Menu principal
 
         do {
-
-            System.out.println("\n SISTEMA DE VOTAÇÃO");
-            System.out.println("1 - Cadastrar candidatos");
+            System.out.println();
+            System.out.println("""
+                     --------------------------------
+                    |       SISTEMA DE VOTAÇÃO       |
+                     --------------------------------""");
+            System.out.println("\n 1 - Cadastrar candidatos");
             System.out.println("2 - Iniciar votação");
             System.out.println("3 - Exibir resultado");
             System.out.println("4 - Exibir matriz de votos");
             System.out.println("5 - Sair");
 
-            System.out.print("Opção: ");
-            opcao = scan.nextInt();
 
-            switch (opcao){
+            opcao = lerInteiro("\n Escolha uma opção: ");
+            System.out.println();
+
+
+            switch (opcao) {
 
                 case 1:
                     System.out.println("Cadastro selecionado");
+                    cadastro();
                     break;
                 case 2:
                     System.out.println("Votação selecionado");
@@ -66,4 +71,38 @@ public class SistemaVotacao {
 
 
     }
-}
+
+    static int lerInteiro(String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+
+            if (scan.hasNextInt()) {
+                int valor = scan.nextInt();
+                scan.nextLine();
+                return valor;
+            }
+            System.out.println("Entrada inválida. Digite um número.");
+            scan.nextLine();
+        }
+    }
+
+    static void cadastro() {
+
+       do {
+            //Definir quantos candidatos serão cadastrados
+            quantidadeCandidatos = lerInteiro("Informe quantos candidatos serão cadastrados: ");
+
+            if (quantidadeCandidatos < 1 || quantidadeCandidatos > MAX_CANDIDATOS) {
+                System.out.print("\n O máximo de candidatos é 5 e o mínimo é 1 \n");
+                return;
+            }
+            System.out.println("Ok ");
+        } while (quantidadeCandidatos < 1 || quantidadeCandidatos > MAX_CANDIDATOS);
+
+
+    }
+
+
+    }
+
+
