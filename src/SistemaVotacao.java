@@ -48,7 +48,7 @@ public class SistemaVotacao {
 
                 case 1:
                     System.out.println("Cadastro selecionado");
-                    cadastro();
+                    cadastrarCandidatos();
                     break;
                 case 2:
                     System.out.println("Votação selecionado");
@@ -86,23 +86,54 @@ public class SistemaVotacao {
         }
     }
 
-    static void cadastro() {
+    static void cadastrarCandidatos() {
 
-       do {
+
+        int quantidade;
+
+        do {
             //Definir quantos candidatos serão cadastrados
-            quantidadeCandidatos = lerInteiro("Informe quantos candidatos serão cadastrados: ");
+            quantidade = lerInteiro("Quantidade de candidatos entre 1 e 5: ");
 
-            if (quantidadeCandidatos < 1 || quantidadeCandidatos > MAX_CANDIDATOS) {
-                System.out.print("\n O máximo de candidatos é 5 e o mínimo é 1 \n");
+            if (quantidade < 1 || quantidade > MAX_CANDIDATOS) {
+                System.out.print("\n Quantidade inválida  \n");
                 return;
             }
             System.out.println("Ok ");
-        } while (quantidadeCandidatos < 1 || quantidadeCandidatos > MAX_CANDIDATOS);
+        } while (quantidade < 1 || quantidade > MAX_CANDIDATOS);
 
+        for (int i = 0; i < quantidade; i++) {
 
+            int numero;
+
+            while (true) {
+                numero = lerInteiro("\n numero do candidato " + (i + 1) + " :");
+                if (numero <= 0) {
+                    System.out.println("O número deve ser maior que zero.");
+                    continue;
+
+                }
+
+                boolean numeroRepetido = false;
+                for (int j = 0; j < i; j++){
+                    if (numerosCandidatos [j] == numero){
+                        numeroRepetido = true;
+                        break;
+                    }
+                }
+                if (numeroRepetido){
+                    System.out.println("ESse número ja está cadastrado.");
+                    continue;
+                }
+                break;
+            }
+        }
     }
 
 
-    }
+}
+
+
+
 
 
