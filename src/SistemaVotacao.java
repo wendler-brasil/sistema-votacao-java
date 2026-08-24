@@ -145,7 +145,10 @@ public class SistemaVotacao {
             nomesCandidatos[i] = nome;
             votosCandidatos[i] = 0;
             quantidadeCandidatos++;
+
+
         }
+
     }
 
     //Procurar candidato pelo número
@@ -161,6 +164,17 @@ public class SistemaVotacao {
         return indiceEncontrado;
     }
 
+    //Mostrar os candidatos disponíveis
+    static void mostrarCandidatos(){
+        System.out.println("\nCandidatos disponíveis: ");
+
+        for (int i = 0; i < quantidadeCandidatos; i++){
+            System.out.println(
+                    numerosCandidatos[i] + " - " + nomesCandidatos[i]
+            );
+        }
+
+    }
 
 }
 
