@@ -115,19 +115,50 @@ public class SistemaVotacao {
                 }
 
                 boolean numeroRepetido = false;
-                for (int j = 0; j < i; j++){
-                    if (numerosCandidatos [j] == numero){
+                for (int j = 0; j < i; j++) {
+                    if (numerosCandidatos[j] == numero) {
                         numeroRepetido = true;
                         break;
                     }
                 }
-                if (numeroRepetido){
+                if (numeroRepetido) {
                     System.out.println("ESse número ja está cadastrado.");
                     continue;
                 }
                 break;
             }
+
+            //Ler e armazenar o nome
+            String nome;
+
+            do {
+                System.out.print("Nome do candidato: ");
+                nome = scan.nextLine().trim();
+
+                if (nome.isEmpty()) {
+                    System.out.println("O nome não pode ficar vazio.");
+                }
+
+            } while (nome.isEmpty());
+
+            numerosCandidatos[i] = numero;
+            nomesCandidatos[i] = nome;
+            votosCandidatos[i] = 0;
+            quantidadeCandidatos++;
         }
+    }
+
+    //Procurar candidato pelo número
+    static int buscarCandidato(int numero) {
+        int indiceEncontrado = -1;
+
+        for (int i = 0; i < quantidadeCandidatos; i++) {
+            if (numerosCandidatos[i] == numero) {
+                indiceEncontrado = i;
+                break;
+            }
+        }
+        return indiceEncontrado;
     }
 
 
