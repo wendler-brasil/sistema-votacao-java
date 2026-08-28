@@ -250,6 +250,7 @@ public class SistemaVotacao {
             }
             System.out.println();
         }
+
     }
 
     static void exibirResultado() {
@@ -261,14 +262,28 @@ public class SistemaVotacao {
 
             if (totalVotos == 0) {
                 System.out.println("Nenhum voto foi registrado.");
+                return;
             }
-            return;
 
-            double percentual = (votosCandidatos[i] * 100.0 / totalVotos;
 
-            System.out.printf("%s -> %d voto(s) (%.2f%%)%n", nomesCandidatos[i],
+            double percentual =
+                    (votosCandidatos[i] * 100.0) / totalVotos;
+
+            System.out.printf(
+                    "%s -> %d voto(s) (%.2f%%)%n",
+                    nomesCandidatos[i],
                     votosCandidatos[i],
-                    percentual);
+                    percentual
+            );
+
+        }
+
+        int maiorQuantidadeDeVotos = votosCandidatos[0];
+
+        for (int i = 1; i < quantidadeCandidatos; i++){
+            if(votosCandidatos[i] > maiorQuantidadeDeVotos){
+                maiorQuantidadeDeVotos = votosCandidatos[i];
+            }
         }
     }
 }
