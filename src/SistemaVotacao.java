@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class SistemaVotacao {
@@ -52,12 +53,15 @@ public class SistemaVotacao {
                     break;
                 case 2:
                     System.out.println("Votação selecionado");
+                    iniciarVotacao();
                     break;
                 case 3:
                     System.out.println("Resultado selecionado");
+
                     break;
                 case 4:
                     System.out.println("Matriz selecionada");
+                    exibirMatrizVotos();
                     break;
                 case 5:
                     System.out.println("Sistema encerrado");
@@ -245,6 +249,26 @@ public class SistemaVotacao {
                 }
             }
             System.out.println();
+        }
+    }
+
+    static void exibirResultado() {
+        int totalVotos = 0;
+
+        for (int i = 0; i < quantidadeCandidatos; i++) {
+            totalVotos += votosCandidatos[i];
+
+
+            if (totalVotos == 0) {
+                System.out.println("Nenhum voto foi registrado.");
+            }
+            return;
+
+            double percentual = (votosCandidatos[i] * 100.0 / totalVotos;
+
+            System.out.printf("%s -> %d voto(s) (%.2f%%)%n", nomesCandidatos[i],
+                    votosCandidatos[i],
+                    percentual);
         }
     }
 }
