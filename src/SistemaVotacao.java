@@ -230,6 +230,23 @@ public class SistemaVotacao {
             System.out.println("Limite de 10 votantes atingido.");
         }
     }
+
+    static void exibirMatrizVotos (){
+        System.out.println("\n====== MATRIZ DE VOTOS ======");
+
+        for (int i = 0; i < TOTAL_TURMAS; i++){
+            System.out.print("Turma " + (i + 1) + ": ");
+
+            for (int j = 0; j < MAX_VOTANTES_POR_TURMA; j ++){
+                if (j < quantidadeVotosTurma[i]){
+                    System.out.println(votosPorTurma[i][j] + " ");
+                }else {
+                    System.out.print("- ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
 
 
