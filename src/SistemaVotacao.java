@@ -15,7 +15,7 @@ public class SistemaVotacao {
 
     static int[][] votosPorTurma = new int[TOTAL_TURMAS][MAX_VOTANTES_POR_TURMA];
 
-    static int[] quantidadeVotosTruma = new int[TOTAL_TURMAS];
+    static int[] quantidadeVotosTurma = new int[TOTAL_TURMAS];
     static int quantidadeCandidatos = 0;
 
     // -------- | --------- | --------
@@ -176,22 +176,60 @@ public class SistemaVotacao {
 
     }
 
-    static void escolherTurma() {
+
+    static void iniciarVotacao() {
+
+        if (quantidadeCandidatos == 0) {
+            System.out.println("Cadastre os candidatos antes de inciar votação.");
+
+
+            return;
+        }
         int turma;
         do {
             turma = lerInteiro("Informe a turma de 1 a 3: ");
 
             if (turma < 1 || turma > TOTAL_TURMAS) System.out.println("Turma inválida");
 
-        }while(turma < 1 || turma > TOTAL_TURMAS);
+        } while (turma < 1 || turma > TOTAL_TURMAS);
 
-        int indiceTurma = turma -1;
+        int indiceTurma = turma - 1;
 
+        if (quantidadeVotosTurma[indiceTurma] >= MAX_VOTANTES_POR_TURMA) {
+            System.out.println("Essa turma já atingiu o limite de votantes.");
+            return;
+        }
 
+        mostrarCandidatos();
+        System.out.println("\nDigite 0 para encerrar a votação desta turma.");
 
+        while (quantidadeVotosTurma[indiceTurma] < MAX_VOTANTES_POR_TURMA) {
 
+            int numero = lerInteiro("\nNúmero do candidato:");
+            if (numero == 0){
+                System.out.println("Votação encerrada.");
+                break;
+            }
+
+            int indiceCandidato = buscarCandidato(numero);
+
+            if (indiceCandidato == -1){
+                System.out.println("Candidato inexistente. Tente novamente.");
+                continue;
+            }
+            int posicaoVoto = quantidadeVotosTurma[indiceTurma];
+            votosPorTurma[indiceTurma][posicaoVoto] = numero;
+            quantidadeVotosTurma[indiceTurma]++;
+            votosCandidatos[indiceCandidato]++;
+
+            System.out.println("Voto registrado com sucesso");
+        }
+
+        if (quantidadeVotosTurma[indiceTurma] == MAX_VOTANTES_POR_TURMA){
+
+            System.out.println("Limite de 10 votantes atingido.");
+        }
     }
-
 }
 
 
