@@ -1,4 +1,3 @@
-import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class SistemaVotacao {
@@ -57,7 +56,7 @@ public class SistemaVotacao {
                     break;
                 case 3:
                     System.out.println("Resultado selecionado");
-
+                    exibirResultado();
                     break;
                 case 4:
                     System.out.println("Matriz selecionada");
@@ -65,6 +64,7 @@ public class SistemaVotacao {
                     break;
                 case 5:
                     System.out.println("Sistema encerrado");
+
                     break;
                 default:
                     System.out.println("Não há essa opção");
@@ -210,14 +210,14 @@ public class SistemaVotacao {
         while (quantidadeVotosTurma[indiceTurma] < MAX_VOTANTES_POR_TURMA) {
 
             int numero = lerInteiro("\nNúmero do candidato:");
-            if (numero == 0){
+            if (numero == 0) {
                 System.out.println("Votação encerrada.");
                 break;
             }
 
             int indiceCandidato = buscarCandidato(numero);
 
-            if (indiceCandidato == -1){
+            if (indiceCandidato == -1) {
                 System.out.println("Candidato inexistente. Tente novamente.");
                 continue;
             }
@@ -229,22 +229,23 @@ public class SistemaVotacao {
             System.out.println("Voto registrado com sucesso");
         }
 
-        if (quantidadeVotosTurma[indiceTurma] == MAX_VOTANTES_POR_TURMA){
+        if (quantidadeVotosTurma[indiceTurma] == MAX_VOTANTES_POR_TURMA) {
 
             System.out.println("Limite de 10 votantes atingido.");
         }
     }
 
-    static void exibirMatrizVotos (){
+    //exibir matriz de votos
+    static void exibirMatrizVotos() {
         System.out.println("\n====== MATRIZ DE VOTOS ======");
 
-        for (int i = 0; i < TOTAL_TURMAS; i++){
+        for (int i = 0; i < TOTAL_TURMAS; i++) {
             System.out.print("Turma " + (i + 1) + ": ");
 
-            for (int j = 0; j < MAX_VOTANTES_POR_TURMA; j ++){
-                if (j < quantidadeVotosTurma[i]){
-                    System.out.println(votosPorTurma[i][j] + " ");
-                }else {
+            for (int j = 0; j < MAX_VOTANTES_POR_TURMA; j++) {
+                if (j < quantidadeVotosTurma[i]) {
+                    System.out.print(votosPorTurma[i][j] + " ");
+                } else {
                     System.out.print("- ");
                 }
             }
@@ -254,6 +255,7 @@ public class SistemaVotacao {
     }
 
     static void exibirResultado() {
+        //calcular total de votos
         int totalVotos = 0;
 
         for (int i = 0; i < quantidadeCandidatos; i++) {
@@ -265,7 +267,9 @@ public class SistemaVotacao {
                 return;
             }
 
-
+        }
+        //Calcular percentual por candidato
+        for (int i = 0; i < quantidadeCandidatos; i++) {
             double percentual =
                     (votosCandidatos[i] * 100.0) / totalVotos;
 
@@ -275,20 +279,40 @@ public class SistemaVotacao {
                     votosCandidatos[i],
                     percentual
             );
-
         }
-
+//Encontrar a maior quantidade de votos
         int maiorQuantidadeDeVotos = votosCandidatos[0];
 
-        for (int i = 1; i < quantidadeCandidatos; i++){
-            if(votosCandidatos[i] > maiorQuantidadeDeVotos){
+        for (int i = 1; i < quantidadeCandidatos; i++) {
+            if (votosCandidatos[i] > maiorQuantidadeDeVotos) {
                 maiorQuantidadeDeVotos = votosCandidatos[i];
             }
         }
+
+        //identificar vencedor ou empate
+        int quantidadeVencedores = 0;
+        for (int i = 0; i < quantidadeCandidatos; i++) {
+            if (votosCandidatos[i] == maiorQuantidadeDeVotos) {
+                quantidadeVencedores++;
+            }
+        }
+        if (quantidadeVencedores == 1) {
+            System.out.print("Vencedor: ");
+        } else {
+            System.out.print("Empate entre: ");
+        }
+
+        boolean primeiroNome = true;
+
+        for (int i = 0; i < quantidadeCandidatos; i++) {
+            if (votosCandidatos[i] == maiorQuantidadeDeVotos) {
+                if (!primeiroNome) {
+                    System.out.print(", ");
+                }
+                System.out.print(nomesCandidatos[i]);
+                primeiroNome = false;
+            }
+        }
+        System.out.println();
     }
 }
-
-
-
-
-
